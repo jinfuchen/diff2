@@ -1,7 +1,5 @@
 \section{Threats to Validity} \label{sec:threats}
 
-% The entire part is from Lizhi's previous report which need to be revised.
-
 This section discusses the threats to the validity of our study.
 
 \noindent \textbf{External validity.}
@@ -13,28 +11,19 @@ All our studied systems are developed in either Java or .Net. Our approach may n
 Our approach builds machine learning models to capture the relationship between the runtime activities that are recorded in logs and the measured performance of a system. 
 However, there might be some runtime activities that are not recorded in logs and that also impact system performance.
 In our approach, we use logs that capture the high-level workloads of the system. 
-Our experiments on our studied systems demonstrated that such logs can predict system performance with a high accuracy.
+Our experiments on our studied systems demonstrated that such logs can predict system performance with high accuracy.
 Nevertheless, the correlation between the runtime activities recorded in the logs and the measured system performance does not necessarily suggest a causal relationship between them.
 
-%Therefore, our approach may not perform well where there is a small amount of performance data, since the quality of the machine learning model. Determining the optimal amount of performance data need for our approach is in our future plan.
-%Although our approach builds machine learning models using logs, we do not claim any causal relationship between the dependent variable and independent variables in the models. The only purpose of building machine learning models is to capture the relation between logs and system performance.
 
 Our approach relies on non-parametric statistical analysis (i.e., Mann-Whitney U test and Cliff's delta) to compare the black-box behaviors of two software versions to detect performance regressions. 
 Our assumption is that statistically different behaviors between two software versions would suggest performance regressions.
-In practice, however, determining whether there is a performance regression usually depends on the subjective judgement of the performance analysts.
+In practice, however, determining whether there is a performance regression usually depends on the subjective judgment of the performance analysts.
 Therefore, our approach enables performance analysts to adjust the threshold of the statistics (e.g., the effect size) to detect performance regressions in their specific scenarios.
-%Although the T-test is widely used to compare two distributions, other statistical tests, such as the Mann-Whitney U test, may also be used in practice to compare predictions and prediction errors. We plan to compare our approach with other statistical tests in future work. we also use Cohen’s d  to calculate the effect size of two distributions and it is defined as the difference between two means divided by a standard deviation for the data. We plan to compare our approach with using other statistical tests and types of effect size.
 
 \noindent \textbf{Construct validity.}
-%Our approach uses linear regression models to model effect size. Although linear regression models have been used in prior research in performance engineering, there exist other statistical models that may model effect size more accurately. our goal is not to accurately predict effect size but rather capture the relationship between weblogs and effect size. Further work may investigate the use of other models.
-%Our evaluation of our approach is based on modeling system CPU usage. 
 In this work, we use the CPU usage as our performance metric to detect performance regressions.
 There exist other performance metrics, such as memory utilization and response time that can be considered to detect performance regressions. 
 Considering other performance metrics would benefit our approach.
 However, monitoring more performance metrics would introduce more performance overhead to the monitored system.
-In the case of our industry system, the CPU usage is the main concern in performance regression detection.
+In the case of our industrial system, CPU usage is the main concern in performance regression detection.
 Besides, the three studied approaches are not limited to the performance metric of CPU usage. Practitioners can leverage our approach to consider other performance metrics that are appropriate in their context.
-%Also, the performance of the subject systems is recorded while running their performance tests. If a web request is not executed by performance tests, it cannot be identified by our approach. To address this threat, we sought to use the performance test that mimics the field workload from our industrial collaborators. However, a different workload may lead to different performance influencing URLs. Therefore, when applying our approach, practitioners should always be aware of the impact of the workload (the performance tests on the system). 
-%Hence, evaluation with more performance metrics and more performance tests may lead to a better understanding of the usefulness of our approach.
-
-%Our approach is based on the recorded system performance logs. The quality of recorded performance can impact the internal validity for our study. Similarly, the frequency of recording system performance may also impact the results of our approach. Further work may further evaluate our approach by varying such frequency. 

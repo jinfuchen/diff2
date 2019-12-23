@@ -1,18 +1,11 @@
 \section{Introduction} \label{sec:intro}
 
-%\heng{Why performance tests are necessary and what is performance testing}
-Many large-scale software systems (e.g., Amazon, Google, Facebook) provide services to millions or even billions of users everyday.
+Many large-scale software systems (e.g., Amazon, Google, Facebook) provide services to millions or even billions of users every day.
 Performance regressions in such systems usually lead to both reputational and monetary losses. 
-For example, a recent incident of performance regressions at Salesforce\footnote{https://www.salesforce.com} affected eight  data centers, resulting in negative impact (i.e., slowdown and failures of the provided services) on the experience of clients across many organizations ~\citep{SaleForcePerfDegradation2019}.
+For example, a recent incident of performance regressions at Salesforce\footnote{https://www.salesforce.com} affected eight data centers, resulting in a negative impact (i.e., slowdown and failures of the provided services) on the experience of clients across many organizations ~\citep{SaleForcePerfDegradation2019}.
 It is reported that 59\% of Fortune 500 companies experience at least 1.6 hours of downtime per week~\citep{SyncsortWhitePaper2018}, while most of the field failures are due to performance issues rather than feature issues~\citep{DBLP:journals/tse/WeyukerV00}.
-%In practice, performance engineers use load testing to detect such performance problems of large-scale software systems~\cite{DBLP:journals/tse/JiangH15}. 
 To avoid such performance-related problems, practitioners perform in-house performance testing to detect performance regressions of large-scale software systems~\citep{DBLP:journals/tse/JiangH15}.
 
-% Some references for performance testing and software downtime \& costs:
-% Downtime, Outages and Failures - Understanding Their True Costs: https://www.evolven.com/blog/downtime-outages-and-failures-understanding-their-true-costs.html
-% Facebook outage: https://www.evolven.com/blog/the-facebook-outage-heard-around-the-world.html
-
-%\heng{Traditional in-house performance testing and its drawback: cannot capture field workloads}
 For in-house performance testing, load generators (e.g., JMeter\footnote{https://jmeter.apache.org}) are used to mimic thousands or millions of users (i.e., the \emph{workload}) accessing the system under test (SUT) at the same time.
 Performance data (e.g., CPU usage) is recorded during the performance testing for later performance analysis.
 To determine whether a performance regression exists, the performance data of the current software version is compared to the performance data from running an earlier version on the same workload, using various analysis techniques~\citep{DBLP:conf/icst/GaoJBL16} (e.g., control charts~\citep{DBLP:conf/wosp/NguyenAJHNF12}).
@@ -21,50 +14,37 @@ First, the real workloads in the field are constantly changing and difficult to 
 Second, performance testing is usually very expensive as it requires extensive resources (e.g., computing power) and lasts for a long time (e.g., hours or even weeks).
 For software systems that follow fast release cycles (e.g., Facebook is released every few hours), performance testing becomes particularly difficult.
 
-%\heng{Related work that aimed to support performance testing and their limitations}
-
-%\ian{Focus not on that we have a new approach, but on that we evaluate whether existing approaches could be applied to test performance deviations under field workloads.}
-%\heng{Our approach for detecting performance deviations under variable workloads from the field}
 
 In this work, we aim at directly detecting performance regressions in the field operations of large-scale software systems.
-%an automated approach %, \emph{FRDetector} (\underline{F}ield \underline{R}egression \underline{Detector}),
-%that aims to detect early performance regressions in the field before they cause critical field problems.
-%that aims to 
-%that uses readily-available field data in the past to detect field performance deviations in the future.
-%Our approach 
 Such an automated detection can complement or even replace typical in-house performance testing when testing resources are limited (e.g., in an agile environment) and/or filed workloads are challenging to be reproduced in testing.
 In particular, we leverage sparsely-sampled performance metrics and readily-available execution logs from the field to detect performance regressions, which only adds negligible performance overhead to SUT.
 Inspired by prior research~\citep{Yao:2018:LSL:3184407.3184416,DBLP:conf/issre/FarshchiSWG15}, we use machine learning techniques (i.e., black-box performance models) to capture the relationship between the runtime activities that are recorded in the readily-available logs of a software system and its performance metrics under such activities. 
-%Besides, our approach provides a better workload coverage (i.e., the real dynamic workloads in the field) than traditional in-house performance testing that uses predefined workloads.
-%Specifically, our black-box models describes the relationship between the logs that recorded the runtime activities and the performance metrics which are both readily-available from the field operations.
 We use the black-box model that describes the current version of a software system and the black-box model that describes an earlier version of the same software system, to determine the existence of performance regressions between these two versions.
 
-We conducted an empirical study on two open source systems (i.e., OpenMRS and Apache James) and one large-scale industrial system. % (i.e., System X). 
-%Our results show that our approach can successfully detect performance deviations under unseen dynamic workloads in the field.
-%\heng{Our research questions}
+We conducted an empirical study on two open source systems (i.e., OpenMRS and Apache James) and one large-scale industrial system. 
 In particular, our study aims to answer two research questions (RQs):
+
 \begin{description}
-\item[\textbf{RQ1:}] \textit{How well can we model system performance under varying workloads?} \\ % How well can the black-box models explain system performance under dynamic workloads?
-%\heng{We find that ...}
+\item[\textbf{RQ1:}] \textit{How well can we model system performance under varying workloads?} \\ 
 In order to capture the performance of a system under varying workloads, we built six machine learning models (including three traditional models and three deep neural networks).
-We found that simple traditional models can accurately capture the relationship between the performance of a system and its dynamic activities that are recorded in logs. %, achieving a median relative error of 2.11\% to 3.58\% for OpenMRS and 22.99\% to 24.42\% for Apache James.
+We found that simple traditional models can effectively capture the relationship between the performance of a system and its dynamic activities that are recorded in logs. 
 In addition, such models can equivalently capture the performance of a system under new workloads that are unseen when building the models.
 
-\item[\textbf{RQ2:}] \textit{Can our approaches detect performance regressions under varying workloads?} \\ % Can the black-box models detect field performance deviations
+\item[\textbf{RQ2:}] \textit{Can our approaches detect performance regressions under varying workloads?} \\ 
 Our black-box model-based approaches can effectively detect both the real performance regressions and injected ones under varying workloads (i.e., when the workloads are unseen when training the black-box models).
 Besides, our approaches can detect performance regressions with the data from a short period of operations, enabling early detection of performance regressions in the field.
 
 \end{description}
 
-%\heng{Contributions of our work}
 Our work makes the following key contributions:
 \begin{itemize} 
-    \item Our study demonstrates the effectiveness of leveraging operational data (e.g., logs and performance metrics) from the field and black-box machine learning models to detect performance regressions in the field.
+    \item Our study demonstrates the effectiveness of using black-box machine learning models to model the performance of a system when the workloads are evolving (i.e., the model trained on a previous workload can capture the system performance under new unseen workloads). %against its dynamic activities in field operations.
+    %\item Our study demonstrates the effectiveness of leveraging operational data (e.g., logs and performance metrics) from the field and black-box machine learning models to detect performance regressions in the field.
+    \item Our experiments on one large-scale industry system and two open source systems show that we can use black-box machine learning models to detect performance regressions in the field where workloads are constantly evolving (i.e., two releases of the same system are never running the same workloads).
     \item Our approaches can complement or even replace traditional in-house performance testing when testing resources are limited.
-    \item We shared the challenges and the lessons the we learned from the successful adoption of our approaches in the industry.
+    \item We shared the challenges and the lessons that we learned from the successful adoption of our approaches in the industry, which can provide insights for researchers and practitioners who are interested in detecting performance regressions in the field.
 \end{itemize}
 
-%\noindent\textbf{Paper organization.} 
 The remainder of the paper is organized as follows. 
 Section~\ref{sec:background} introduces the background of black-box performance modeling.
 Section~\ref{sec:approach} outlines our approaches for detecting performance regressions in the field.

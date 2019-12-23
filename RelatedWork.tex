@@ -1,48 +1,33 @@
 \section{Related Work} \label{sec:relatedwork}
-%In this section, we present prior research related to our work.
-%Our work leverages performance metrics and execution logs to detect performance regressions in the field. 
-We discuss related work along two directions: prior work that analyzes performance test results and that leverages logs to detect performance-related anomalies.
+We discuss related work along with two directions: prior work that analyzes performance test results and that leverages logs to detect performance-related anomalies.
 
-%\subsection{Performance test analysis}
 \subsection{Analyzing performance test results}
 Prior research has proposed many automated techniques to analyze the results of performance tests~\citep{DBLP:conf/icst/GaoJBL16,DBLP:journals/tse/JiangH15}.
-%~\cite{DBLP:conf/sosp/CohenZGSKF05,DBLP:conf/icac/BarnaLG11,DBLP:conf/wosp/XiongPZG13,DBLP:conf/wosp/ShangHNF15,DBLP:conf/wosp/DidonaQRT15}. 
-%Jiang and Hassan~\cite{DBLP:journals/tse/JiangH15} survey 196 research papers on performance test analysis.
-%Such techniques derive performance models from tests using different approaches, i.e., QNM and data mining algorithms. 
 Initially, the Queuing Network Model (QNM)~\citep{DBLP:books/daglib/0076254} has been proposed to model the performance of a software system based on the queuing theory. 
-Based on QNM, Barna et al.~\citep{DBLP:conf/icac/BarnaLG11} proposes an autonomic performance testing framework to locate the software and hardware bottlenecks in the system. They use a two-layer QNM to automatically target hardware and software resources utilization limits (e.g., hardware utilization, web container threads number, and response time). 
+Based on QNM, ~\citet{DBLP:conf/icac/BarnaLG11} proposes an autonomic performance testing framework to locate the software and hardware bottlenecks in the system. They use a two-layer QNM to automatically target hardware and software resources utilization limits (e.g., hardware utilization, web container threads number, and response time). 
 
-Due to the increasing complexity of software systems and their behaviors, QNM-based performance model becomes insufficient. % for performance modeling. 
+Due to the increasing complexity of software systems and their behaviors, the QNM-based performance model becomes insufficient.
 Therefore, prior work uses statistical methods to assist in performance analysis.
-%Cohen~\cite{DBLP:conf/sosp/CohenZGSKF05} et al. show an implication that it is ineffective and not enough to index and retrieve performance problems with simple records of raw system metrics. 
-Cohen et al.~\citep{DBLP:conf/sosp/CohenZGSKF05} present an approach that captures the signatures of the states of a running system and then cluster such signatures to detect recurrent or similar performance problems. 
-Nguyen et al.~\citep{DBLP:conf/apsec/NguyenAJHNF11,DBLP:conf/wosp/NguyenAJHNF12} use control charts to analyze performance metrics across test runs to detect performance regressions.
-%Performance testing may produce across thousands of correlated performance metrics, which make it expensive and laborious for system analysts to analyze and isolate the metrics to identify performance problems. 
-%Therefore, 
-Mailk et al.~\citep{DBLP:conf/csmr/MalikJAHFH10,DBLP:conf/icse/MalikHH13} use principle component analysis (PCA) to reduce the large number of performance metrics to a smaller set, in order to reduce the efforts of performance analysts. % to identify performance problems. 
+~\citet{DBLP:conf/sosp/CohenZGSKF05} present an approach that captures the signatures of the states of a running system and then cluster such signatures to detect recurrent or similar performance problems. 
+~\citet{DBLP:conf/apsec/NguyenAJHNF11,DBLP:conf/wosp/NguyenAJHNF12} use control charts to analyze performance metrics across test runs to detect performance regressions.
+~\citet{DBLP:conf/csmr/MalikJAHFH10,DBLP:conf/icse/MalikHH13} use principle component analysis (PCA) to reduce the large number of performance metrics to a smaller set, in order to reduce the efforts of performance analysts.
 
 Prior work also uses machine learning techniques for performance analysis~\citep{DBLP:conf/wosp/ShangHNF15,DBLP:conf/wosp/XiongPZG13,Foo:2015:ICS:2819009.2819034,DBLP:conf/icdm/LimLZFTLDZ14,DBLP:conf/wosp/DidonaQRT15}.
-Shang et al.~\citep{DBLP:conf/wosp/ShangHNF15} propose an approach that automatically selects target performance metrics from a larger set, in order to model system performance. 
-Xiong et al.~\citep{DBLP:conf/wosp/XiongPZG13} propose an approach that automatically identifies the system metrics that are highly related to system performance and detects changes in the system metrics that lead to changes in the system performance. 
-%Simple performance models may not be sufficient to analyze results of performance tests.
-%Therefore, 
-Foo et al.~\citep{Foo:2015:ICS:2819009.2819034} build ensembles of models and association rules to detect performance regressions in heterogeneous environments, in order to achieve high precision and recall in the detection results.
-%Lim et al.~\cite{DBLP:conf/icdm/LimLZFTLDZ14} leverage historical performance records and build Hidden Markov Random Field models to uncover recurrent and unknown performance issues. 
-%Didona et al.~\cite{DBLP:conf/wosp/DidonaQRT15} combine analytical modeling and machine learning to enhance the robustness of performance predictions. They apply three ensemble techniques to combine machine learning with analytical modeling to reduce the training time while also increase the accuracy of performance predictions.  
+~\citet{DBLP:conf/wosp/ShangHNF15} proposes an approach that automatically selects target performance metrics from a larger set, in order to model system performance. 
+~\citet{DBLP:conf/wosp/XiongPZG13} propose an approach that automatically identifies the system metrics that are highly related to system performance and detects changes in the system metrics that lead to changes in the system performance. 
+~\citet{Foo:2015:ICS:2819009.2819034} build ensembles of models and association rules to detect performance regressions in heterogeneous environments, in order to achieve high precision and recall in the detection results.
 
 Different from existing approaches that analyze the results of in-house performance tests, our approach builds black-box performance models that leverage performance metrics and readily available logs to detect performance regressions in the field.
 
 \subsection{Leveraging logs to detect performance-related anomalies}
 
-%Software logs can be assisted to analyze and diagnose system performance. 
 Prior research proposes various approaches that leverage execution logs to detect performance-related anomalies~\citep{DBLP:journals/tse/JiangH15,DBLP:conf/sosp/XuHFPJ09,DBLP:conf/icdcs/TanKGN10,DBLP:conf/sigsoft/HeLLZLZ18}. 
-%Jiang and Hassan~\cite{DBLP:journals/tse/JiangH15} survey 196 research papers on automated test techniques using system execution logs. 
-Jiang et al.~\citep{DBLP:conf/icsm/JiangHHF09} propose a framework that automatically generates a report to detect and rank potential performance problems and the associated log sequences. 
-Xu et al.~\citep{DBLP:conf/sosp/XuHFPJ09} extract event features from the execution logs and leverage PCA to detect performance-related anomalies. 
-Tan et al.~\citep{DBLP:conf/icdcs/TanKGN10} present a state-machine view from the execution logs of Hadoop to understand the system behavior and debug performance problems. 
-%Han et al.~\citep{DBLP:conf/icse/HanDGZX12} proposes an approach namely \emph{StackMine} to discover highly impactful performance bugs by mining a large of stack traces. 
-Syer et al.~\citep{DBLP:journals/ase/SyerSJH17} propose to leverage execution logs to continuously validate whether the workloads in the performance tests are reflective of the field workloads. Syer et al.~\citep{DBLP:conf/icsm/SyerJNHNF13} also propose to combine execution logs and performance metrics to diagnose memory-related performance  issues. 
-Similarly, He et al.~\citep{DBLP:conf/sigsoft/HeLLZLZ18} correlate the clusters of log sequences with system performance metrics to identify impactful system problems (e.g., request latency and service availability).
+~\citet{DBLP:conf/icsm/JiangHHF09} propose a framework that automatically generates a report to detect and rank potential performance problems and the associated log sequences. 
+~\citet{DBLP:conf/sosp/XuHFPJ09} extract event features from the execution logs and leverage PCA to detect performance-related anomalies. 
+~\citet{DBLP:conf/icdcs/TanKGN10} present a state-machine view from the execution logs of Hadoop to understand the system behavior and debug performance problems. 
+~\citet{DBLP:journals/ase/SyerSJH17} propose to leverage execution logs to continuously validate whether the workloads in the performance tests are reflective of the field workloads. 
+~\citet{DBLP:conf/icsm/SyerJNHNF13} also propose to combine execution logs and performance metrics to diagnose memory-related performance issues. 
+Similarly,~\citet{DBLP:conf/sigsoft/HeLLZLZ18} correlates the clusters of log sequences with system performance metrics to identify impactful system problems (e.g., request latency and service availability).
 
 In comparison, our approach leverages the relationship between the logs and performance metrics from the field to detect performance regressions between two versions of a software system.
 
