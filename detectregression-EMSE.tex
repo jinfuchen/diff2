@@ -1,0 +1,122 @@
+\documentclass[smallextended]{svjour3}
+
+\input{setup}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	%numberstyle=\tiny\color{gray},
+	%keywordstyle=\color{blue},
+	%commentstyle=\color{dkgreen},
+	%stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+
+\newcommand{\specialcell}[2][c]{%
+	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage[flushleft]{threeparttable}
+\usepackage{flushend}
+
+\usepackage[round,sort]{natbib}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\begin{document}
+
+\title{Using Black-Box Performance Models to Detect Performance Regressions under Varying Workloads: An Empirical Study}
+
+%\titlerunning{shorter title}
+\author{Lizhi Liao \and
+	    Jinfu Chen \and
+	    Heng Li \and
+	    Yi Zeng \and
+	    Weiyi Shang \and
+	    Jianmei Guo \and
+	    Catalin Sporea \and 
+	    Andrei Toma \and
+	    Sarah Sajedi
+}
+
+\institute{Lizhi Liao, Jinfu Chen, Yi Zeng, Weiyi Shang\at
+	Department of Computer Science and Software Engineering\\
+	Concordia University\\
+	Montreal, Quebec, Canada\\
+	\email{\{l\_lizhi, fu\_chen, ze\_yi, shang\}@encs.concordia.ca} \\\\
+	Heng Li\at
+	Software Analysis and Intelligence Lab (SAIL)\\
+	Queen’s University\\
+	Kingston, Ontario, Canada\\
+	\email{hengli@cs.queensu.ca} \\\\
+	Jianmei Guo \at
+	Alibaba Group\\
+	Hangzhou, Zhejiang, China\\
+	\email{jianmei.gjm@alibaba-inc.com} \\\\
+	Catalin Sporea, Andrei Toma,Sarah Sajedi \at
+	ERA Environmental Management Solutions\\
+	Montreal, QC, Canada\\
+	\email{\{steve.sporea, andrei.toma, sarah.sajedi\}@era-ehs.com}
+}
+
+\date{Received: date / Accepted: date}
+
+% make the title area
+\maketitle
+
+
+\input{Abstract}
+
+\keywords{Performance regression, Black-box performance models, Field workloads, Performance engineering}
+
+\input{Introduction}
+
+\input{Background}
+
+\input{Approach}
+
+\input{CaseStudySetup}
+
+\input{CaseStudyResult.tex}
+
+\input{ChallengesLessons.tex}
+
+\input{Threats}
+
+\input{RelatedWork} 
+
+\input{Conclusions}
+
+\section*{Acknowledgement}
+We would like to thank ERA Environmental Management Solutions
+for providing access to the enterprise system used in our case study.
+The findings and opinions expressed in this paper are those of the
+authors and do not necessarily represent or reflect those of ERA
+Environmental Management Solutions and/or its subsidiaries and
+affiliates. Moreover, our results do not reflect the quality of ERA
+Environmental Management Solutions’ products.
+
+%Import the natbib package and sets a bibliography  and citation styles
+\bibliographystyle{natbib}
+
+\bibliography{detectregression}
+
+
+% that's all folks
+\end{document}
+
+

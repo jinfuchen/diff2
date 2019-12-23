@@ -1,0 +1,14 @@
+\section{Conclusions} \label{sec:conclusions}
+
+%Performance regressions in large-scale software systems usually leads to reputational and monetary losses.
+%Traditionally, practitioners perform in-house performance testing to detect such performance regressions.
+%However, such in-house performance testing is usually very expensive and difficult to simulate the constantly-changing workloads from the field.
+
+In this paper, we propose to leverage automated approaches   %, \emph{FRDetector}, 
+that can effectively detect early performance regressions in the field. 
+We study three approaches that use black-box performance models to capture the relationship between the activities of a software system and its performance under such activities, and then compare the black-box models derived from the current version of a software system and an earlier version of the same software system, to determine the existence of performance regressions between these two versions.
+By an empirical study on two open source systems (OpenMRS and Apache James) and one large-scale industry system, we found that simple black-box models (e.g., random forest) can accurately capture the relationship between the performance of a system under varying workloads and its dynamic activities that are recorded in logs.
+%Besides, such models can equivalently explain the performance of a system under new workloads unseen when building the models.
+We also found that these black-box models can effectively detect real performance regressions and injected performance regressions under varying workloads, requiring data from only a short period of operations.
+Our approaches can complement or even replace typical in-house performance testing when testing resources are limited (e.g., in an agile environment).
+The challenges and the lessons that we learned from the successful adoption of our approach also provide insights for practitioners who are interested in performance regression detection in the field.

@@ -1,0 +1,21 @@
+\begin{abstract}
+    %Large-scale software systems (e.g., Google) usually need to be performance-tested to ensure their capability to handle a large number of concurrent requests while still delivering the right services at the right quality. 
+    Performance regressions of large-scale software systems
+    often lead to both financial and reputational losses.
+    In order to detect performance regressions, performance tests are typically conducted in an in-house (non-production) environment using test suites with predefined workloads. 
+    Then, performance analysis is performed to check whether a software version has a performance regression against an earlier version. 
+    However, the real workloads in the field are constantly changing, making it unrealistic to resemble the field workloads in predefined test suites. 
+    More importantly, performance testing is usually very expensive as it requires extensive resources and lasts for an extended period. 
+    In this work, %we propose an automated approach that
+    we leverage black-box machine learning models to automatically detect performance regressions in the field operations of large-scale software systems.
+    Practitioners can leverage our approaches to complement or replace resource-demanding performance tests that may not even be realistic in a fast-paced environment.
+    Our approaches use black-box models to capture the relationship between the performance of a software system (e.g., CPU usage) under varying workloads and the runtime activities that are recorded in the readily-available logs. % of the software system. 
+    Then, our approaches compare the black-box models derived from the current software version with an earlier version to detect performance regressions between these two versions.
+    We conducted a case study on two open source systems %(i.e., OpenMRS and Apache James) 
+    and one large-scale industry system. 
+    %Our case study results show that simple models (e.g., random forest) can accurately capture the performance of a software system under varying workloads.
+    Our results show that such black-box models can effectively and timely detect real performance regressions and injected ones under varying workloads that are unseen when training these models.
+    %In addition, the model can be used to effectively identify performance deviations under field workloads that have not been performance-tested before. 
+    Our approaches have been adopted in practice to detect performance regressions of a large-scale industry system on a daily basis. 
+    %We share our lessons learned from our experience of deploying our performance deviation detection approach in the industry.	
+\end{abstract}
